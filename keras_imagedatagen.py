@@ -106,10 +106,11 @@ def model_ResNet50(inputs, num_classes):
 	return model
 
 inputs = Input(shape=(INPUT_SIZE, INPUT_SIZE, 3), name='input')	
-model = model_ResNet50(inputs, num_classes) 
+#model = model_ResNet50(inputs, num_classes)
+#Epoch 35/50 - 48s 917ms/step - loss: 0.2145 - acc: 0.9285 - val_loss: 1.3748 - val_acc: 0.7603
 
-#from models import cnn_128
-#model = cnn_128(inputs, num_classes=num_classes)
+from models import cnn_128
+model = cnn_128(inputs, num_classes=num_classes)
 
 """
 model = Sequential()
