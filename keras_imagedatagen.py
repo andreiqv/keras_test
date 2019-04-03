@@ -44,21 +44,21 @@ def check_datagen_on_image(image_path):
 	for _ in range(2):
 		batch = iterator.next()
 
-check_datagen_on_image('/mnt/lin2/datasets/natural_images/cat/cat_0008.jpg')
+#check_datagen_on_image('/mnt/lin2/datasets/natural_images/cat/cat_0008.jpg')
 
 
 # this is a generator that will read pictures found in
 # subfolers of 'data/train', and indefinitely generate
 # batches of augmented image data
 train_generator = train_datagen.flow_from_directory(
-        '/mnt/lin2/datasets/natural_images',  # this is the target directory
+        '../natural_images',  # this is the target directory
         target_size=(INPUT_SIZE, INPUT_SIZE),  # all images will be resized to 150x150
         batch_size=BATCH_SIZE,
         class_mode='categorical')  
 
 # this is a similar generator, for validation data
 validation_generator = validation_datagen.flow_from_directory(
-        '/mnt/lin2/datasets/natural_images',
+        '../natural_images',
         target_size=(INPUT_SIZE, INPUT_SIZE),
         batch_size=BATCH_SIZE,
         class_mode='categorical') #'binary' - # since we use binary_crossentropy loss, we need binary labels
