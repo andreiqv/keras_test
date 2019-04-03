@@ -2,15 +2,26 @@
 
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 
-BATCH_SIZE = 8
+BATCH_SIZE = 64
 INPUT_SIZE = 128
 
 # this is the augmentation configuration we will use for training
+"""
 train_datagen = ImageDataGenerator(
         rescale=1./255,
         shear_range=0.2,
         zoom_range=0.2,
         horizontal_flip=True)
+"""
+train_datagen = ImageDataGenerator(
+		rotation_range=40,
+		width_shift_range=0.2,
+		height_shift_range=0.2,
+		rescale=1./255,
+		shear_range=0.2,
+		zoom_range=0.2,
+		horizontal_flip=True,
+		fill_mode='nearest')
 
 # this is the augmentation configuration we will use for testing:
 # only rescaling
