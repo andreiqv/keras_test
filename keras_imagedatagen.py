@@ -62,14 +62,14 @@ def check_datagen_on_image(image_path):
 # subfolers of 'data/train', and indefinitely generate
 # batches of augmented image data
 train_generator = train_datagen.flow_from_directory(
-        '../natural_images',  # this is the target directory
+        '/home/andrei/work/t7_cv/dataset_plants/splited/train',  # this is the target directory
         target_size=(INPUT_SIZE, INPUT_SIZE),  # all images will be resized to 150x150
         batch_size=BATCH_SIZE,
         class_mode='categorical')  
 
 # this is a similar generator, for validation data
 validation_generator = validation_datagen.flow_from_directory(
-        '../natural_images',
+        '/home/andrei/work/t7_cv/dataset_plants/splited/valid',
         target_size=(INPUT_SIZE, INPUT_SIZE),
         batch_size=BATCH_SIZE,
         class_mode='categorical') #'binary' - # since we use binary_crossentropy loss, we need binary labels
