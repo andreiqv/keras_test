@@ -95,10 +95,10 @@ def model_ResNet50(inputs):
 	return model
 
 inputs = Input(shape=(INPUT_SIZE, INPUT_SIZE, 3), name='input')	
-#model = model_ResNet50(inputs) 
+model = model_ResNet50(inputs) 
 
-from models import cnn_128
-model = cnn_128(inputs, num_classes=num_classes)
+#from models import cnn_128
+#model = cnn_128(inputs, num_classes=num_classes)
 
 """
 model = Sequential()
