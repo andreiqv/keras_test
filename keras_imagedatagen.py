@@ -97,16 +97,16 @@ from keras.layers import Input, Activation, Dropout, Flatten, Dense
 
 from keras.applications.resnet50 import ResNet50
 
-def model_ResNet50(inputs):
+def model_ResNet50(inputs, num_classes):
 	base_model = ResNet50(weights='imagenet', include_top=False, 
 		pooling='avg', input_tensor=inputs)
 	x = base_model.output
-	x = Dense(8, activation='softmax')(x)
+	x = Dense(num_classes, activation='softmax')(x)
 	model = Model(inputs=inputs, outputs=x, name='keras_ResNet50')	
 	return model
 
 inputs = Input(shape=(INPUT_SIZE, INPUT_SIZE, 3), name='input')	
-model = model_ResNet50(inputs) 
+model = model_ResNet50(inputs, num_classes) 
 
 #from models import cnn_128
 #model = cnn_128(inputs, num_classes=num_classes)
