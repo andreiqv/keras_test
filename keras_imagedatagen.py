@@ -2,7 +2,7 @@
 from keras.preprocessing.image import ImageDataGenerator
 from keras.preprocessing.image import array_to_img, img_to_array, load_img
 
-from settings
+import settings
 BATCH_SIZE = 64
 INPUT_SIZE = 128
 
