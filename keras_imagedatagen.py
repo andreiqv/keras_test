@@ -2,7 +2,7 @@
 from keras.preprocessing.image import ImageDataGenerator
 from keras.preprocessing.image import array_to_img, img_to_array, load_img
 
-from settings import *
+from settings
 BATCH_SIZE = 64
 INPUT_SIZE = 128
 
@@ -63,14 +63,14 @@ def check_datagen_on_image(image_path):
 # subfolers of 'data/train', and indefinitely generate
 # batches of augmented image data
 train_generator = train_datagen.flow_from_directory(
-        train_data_path,  # this is the target directory
+        settings.train_data_path,  # this is the target directory
         target_size=(INPUT_SIZE, INPUT_SIZE),  # all images will be resized to 150x150
         batch_size=BATCH_SIZE,
         class_mode='categorical')  
 
 # this is a similar generator, for validation data
 validation_generator = validation_datagen.flow_from_directory(
-        validation_data_path,
+        settings.validation_data_path,
         target_size=(INPUT_SIZE, INPUT_SIZE),
         batch_size=BATCH_SIZE,
         class_mode='categorical') #'binary' - # since we use binary_crossentropy loss, we need binary labels
