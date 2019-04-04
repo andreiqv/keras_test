@@ -148,7 +148,7 @@ print(model.summary())
 model.fit_generator(
         train_generator,
         steps_per_epoch=len(train_generator.filenames) // train_generator.batch_size,
-        epochs=10,
+        epochs=30,
         validation_data=validation_generator,
         validation_steps=len(validation_generator.filenames) // validation_generator.batch_size)
 #model.save_weights('first_try.h5')  # always save your weights after training or during training

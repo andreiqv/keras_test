@@ -34,7 +34,7 @@ def conv(x, f, k, s=1, p='SAME', a='relu'):
 		)(x)
 	return x
 
-maxpool = lambda x, p=2, s=1: layers.MaxPool2D(pool_size=p, strides=s)(x)	
+maxpool = lambda x, p=2, s=1: layers.MaxPool2D(pool_size=p, strides=s)(x) # ! s==1 !
 maxpool2 = lambda x, p=2: layers.MaxPool2D(pool_size=p)(x)	
 bn = lambda x: layers.BatchNormalization()(x)
 
