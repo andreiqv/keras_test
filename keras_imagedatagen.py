@@ -143,7 +143,7 @@ model.add(Activation('softmax'))
 #			optimizer='rmsprop', metrics=['accuracy'])
 model.compile(loss='categorical_crossentropy', 
 			optimizer='rmsprop', metrics=['accuracy'])
-
+print(model.summary())
 
 model.fit_generator(
         train_generator,

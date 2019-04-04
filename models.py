@@ -101,8 +101,8 @@ def cnn_128(inputs, num_classes):
 	x = maxpool(x)  # 8
 
 	x = layers.Flatten()(x)
-	x = layers.Dropout(0.5)(x)
-	x = layers.Dense(200, activation='elu')(x)
+	#x = layers.Dropout(0.5)(x)
+	#x = layers.Dense(200, activation='elu')(x)
 	x = layers.Dropout(0.5)(x)
 	x = layers.Dense(num_classes, activation='softmax', name=OUTPUT_NAME)(x)
 	model = keras.Model(inputs, x, name='cnn_128')
