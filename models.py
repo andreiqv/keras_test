@@ -112,3 +112,8 @@ def cnn_128(inputs, num_classes):
 	model = keras.Model(inputs, x, name='cnn_128')
 	
 	return model
+
+"""
+without rotation:
+Epoch 25/30 - 46s 882ms/step - loss: 0.7686 - acc: 0.7492 - val_loss: 0.6033 - val_acc: 0.8090
+"""

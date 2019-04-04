@@ -7,6 +7,7 @@ BATCH_SIZE = 64
 INPUT_SIZE = 128
 
 # this is the augmentation configuration we will use for training
+"""
 train_datagen = ImageDataGenerator(
         rescale=1./255,
         shear_range=0.2,
@@ -22,7 +23,6 @@ train_datagen = ImageDataGenerator(
 		height_shift_range=0.2,
 		horizontal_flip=True,
 		fill_mode='nearest')
-"""
 
 
 # this is the augmentation configuration we will use for testing:
