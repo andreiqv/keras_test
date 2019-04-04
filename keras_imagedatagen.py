@@ -1,7 +1,8 @@
 # https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
+from keras.preprocessing.image import ImageDataGenerator
+from keras.preprocessing.image import array_to_img, img_to_array, load_img
 
-from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
-
+from settings import *
 BATCH_SIZE = 64
 INPUT_SIZE = 128
 
@@ -62,14 +63,14 @@ def check_datagen_on_image(image_path):
 # subfolers of 'data/train', and indefinitely generate
 # batches of augmented image data
 train_generator = train_datagen.flow_from_directory(
-        '/home/andrei/work/t7_cv/dataset_plants/splited/train',  # this is the target directory
+        train_data_path,  # this is the target directory
         target_size=(INPUT_SIZE, INPUT_SIZE),  # all images will be resized to 150x150
         batch_size=BATCH_SIZE,
         class_mode='categorical')  
 
 # this is a similar generator, for validation data
 validation_generator = validation_datagen.flow_from_directory(
-        '/home/andrei/work/t7_cv/dataset_plants/splited/valid',
+        validation_data_path,
         target_size=(INPUT_SIZE, INPUT_SIZE),
         batch_size=BATCH_SIZE,
         class_mode='categorical') #'binary' - # since we use binary_crossentropy loss, we need binary labels

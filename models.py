@@ -28,7 +28,10 @@ def conv(x, f, k, s=1, p='SAME', a='relu'):
 		padding=p,
 		activation=a, # relu, selu
 		#kernel_regularizer=regularizers.l2(0.01),
-		use_bias=True)(x)
+		use_bias=True,
+		kernel_initializer=keras.initializers.he_normal(seed=10),
+		bias_initializer='zeros'
+		)(x)
 	return x
 
 maxpool = lambda x, p=2, s=1: layers.MaxPool2D(pool_size=p, strides=s)(x)	
