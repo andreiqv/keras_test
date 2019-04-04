@@ -81,12 +81,18 @@ def cnn_128(inputs, num_classes):
 	x = conv(x, 8, 5)
 	#x = conv(x, 8, 5)
 	x = maxpool(x)  # 64
+	
+	x = bn(x)
 	x = conv(x, 16, 3)
 	#x = conv(x, 16, 3)
 	x = maxpool(x)  # 32
+
+	x = bn(x)
 	x = conv(x, 16, 3)
 	#x = conv(x, 16, 3)
 	x = maxpool(x)  # 16
+
+	x = bn(x)
 	x = conv(x, 32, 3)
 	#x = conv(x, 32, 3)
 	x = maxpool(x)  # 8
