@@ -20,7 +20,7 @@ def model_ResNet50(inputs):
 
 # --------------------
 
-def conv(x, f, k, s=1, p='SAME', a='tanh'):
+def conv(x, f, k, s=1, p='SAME', a='relu'):
 	x = layers.Conv2D(
 		filters=f,
 		kernel_size=(k, k),
@@ -78,21 +78,18 @@ def cnn_128(inputs, num_classes):
 	val_loss: 0.0053 - val_accuracy: 0.9999 - val_miou: 0.7339
 	"""
 	x = inputs 
-	x = conv(x, 8, 3)
-	x = conv(x, 8, 3)
+	x = conv(x, 8, 5)
+	#x = conv(x, 8, 5)
 	x = maxpool(x)  # 64
 	x = conv(x, 16, 3)
-	x = conv(x, 16, 3)
+	#x = conv(x, 16, 3)
 	x = maxpool(x)  # 32
 	x = conv(x, 16, 3)
-	x = conv(x, 16, 3)
+	#x = conv(x, 16, 3)
 	x = maxpool(x)  # 16
-	x = conv(x, 16, 3)
-	x = conv(x, 16, 3)
+	x = conv(x, 32, 3)
+	#x = conv(x, 32, 3)
 	x = maxpool(x)  # 8
-	x = conv(x, 32, 3)
-	x = conv(x, 32, 3)
-	x = maxpool(x)  # 4 x 4 x 32
 
 	x = layers.Flatten()(x)
 	#x = layers.Dropout(0.5)(x)
