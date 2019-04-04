@@ -100,6 +100,10 @@ def cnn_128(inputs, num_classes):
 	#x = conv(x, 32, 3)
 	x = maxpool(x)  # 8
 
+	x = conv(x, 64, 3)
+	#x = conv(x, 32, 3)
+	x = maxpool(x)  # 4
+
 	x = layers.Flatten()(x)
 	#x = layers.Dropout(0.5)(x)
 	#x = layers.Dense(200, activation='elu')(x)
