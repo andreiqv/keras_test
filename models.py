@@ -96,9 +96,9 @@ def cnn_128(inputs, num_classes):
 	x = maxpool(x)  # 16
 
 	#x = bn(x)
+	x = conv(x, 32, 3)
 	#x = conv(x, 32, 3)
-	#x = conv(x, 32, 3)
-	#x = maxpool(x)  # 8
+	x = maxpool(x)  # 8
 
 	x = layers.Flatten()(x)
 	x = layers.Dropout(0.5)(x)
