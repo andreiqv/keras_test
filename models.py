@@ -116,4 +116,8 @@ def cnn_128(inputs, num_classes):
 """
 without rotation:
 Epoch 25/30 - 46s 882ms/step - loss: 0.7686 - acc: 0.7492 - val_loss: 0.6033 - val_acc: 0.8090
+
+with rotation:
+Epoch 25/30 - 49s 935ms/step - loss: 1.0445 - acc: 0.6510 - val_loss: 0.7938 - val_acc: 0.7441
+
 """

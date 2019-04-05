@@ -16,6 +16,17 @@ train_datagen = ImageDataGenerator(
 """
 train_datagen = ImageDataGenerator(
 		rescale=1./255,
+		shear_range=0.1,
+		zoom_range=0.1,
+		rotation_range=20,
+		width_shift_range=0.1,
+		height_shift_range=0.1,
+		horizontal_flip=True,
+		fill_mode='nearest')
+
+"""
+train_datagen = ImageDataGenerator(
+		rescale=1./255,
 		shear_range=0.2,
 		zoom_range=0.2,
 		rotation_range=40,
@@ -23,7 +34,7 @@ train_datagen = ImageDataGenerator(
 		height_shift_range=0.2,
 		horizontal_flip=True,
 		fill_mode='nearest')
-
+"""
 
 # this is the augmentation configuration we will use for testing:
 # only rescaling
