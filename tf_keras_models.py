@@ -143,9 +143,9 @@ def cnn_128_rot(inputs, num_classes):
 	x = inputs
 	print('x:', x) # x == Tensor("input:0", shape=(?, 128, 128, 3), dtype=float32)
 	#x1 = x
-	x1 = layers.Lambda(lambda z: tf.image.rot90(z))(x)
-	x2 = x
-	x3 = x
+	x1 = layers.Lambda(lambda z: tf.image.rot90(z, k=1))(x)
+	x2 = layers.Lambda(lambda z: tf.image.rot90(z, k=2))(x)
+	x3 = layers.Lambda(lambda z: tf.image.rot90(z, k=3))(x)
 	x4 = x
 	x = layers.concatenate(
 		[x1, x2, x3, x4],
