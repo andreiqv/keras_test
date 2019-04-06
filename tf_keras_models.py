@@ -1,10 +1,11 @@
-import keras
+import tensorflow as tf
+from tensorflow import keras
 #layers = keras.layers
-from keras import backend
-from keras import backend as K
-from keras import layers
+from tensorflow.keras import backend
+from tensorflow.keras import backend as K
+from tensorflow.keras import layers
 
-from keras.applications.resnet50 import ResNet50
+from tensorflow.keras.applications.resnet50 import ResNet50
 #from keras.applications.inception_v3 import InceptionV3
 #from keras.applications.mobilenet_v2 import MobileNetV2  #224x224.
 #from keras.applications.mobilenet import MobileNet  #224x224.
@@ -141,7 +142,7 @@ def cnn_128_rot(inputs, num_classes):
 	# inputs: shape=(INPUT_SIZE, INPUT_SIZE, 3)
 	x = inputs
 	print('x:', x) # x == Tensor("input:0", shape=(?, 128, 128, 3), dtype=float32)
-	x1 = K.image.rot90(x)
+	x1 = tf.image.rot90(x)
 	x2 = x
 	x3 = x
 	x4 = x

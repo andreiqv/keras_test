@@ -1,6 +1,6 @@
 # https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
-from keras.preprocessing.image import ImageDataGenerator
-from keras.preprocessing.image import array_to_img, img_to_array, load_img
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import array_to_img, img_to_array, load_img
 
 import settings
 BATCH_SIZE = 64
@@ -103,12 +103,11 @@ print(train_generator.total_batches_seen)
 num_classes = train_generator.num_classes
 #-----------------
 
-from keras import Model
-from keras.models import Sequential
-from keras.layers import Dense, Conv2D, MaxPooling2D
-from keras.layers import Input, Activation, Dropout, Flatten, Dense
-
-from keras.applications.resnet50 import ResNet50
+from tensorflow.keras import Model
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D
+from tensorflow.keras.layers import Input, Activation, Dropout, Flatten, Dense
+from tensorflow.keras.applications.resnet50 import ResNet50
 
 def model_ResNet50(inputs, num_classes):
 	base_model = ResNet50(weights='imagenet', include_top=False, 
@@ -122,7 +121,7 @@ inputs = Input(shape=(INPUT_SIZE, INPUT_SIZE, 3), name='input')
 #model = model_ResNet50(inputs, num_classes)
 #Epoch 35/50 - 48s 917ms/step - loss: 0.2145 - acc: 0.9285 - val_loss: 1.3748 - val_acc: 0.7603
 
-from models import cnn_128, cnn_128_rot
+from tf_keras_models import cnn_128, cnn_128_rot
 #model = cnn_128(inputs, num_classes=num_classes)
 model = cnn_128_rot(inputs, num_classes=num_classes)
 
