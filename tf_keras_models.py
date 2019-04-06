@@ -154,26 +154,26 @@ def cnn_128_rot(inputs, num_classes):
 	print('x1:', x1) # 
 	print('concat x:', x) # Tensor("concat0/concat:0", shape=(?, 128, 128, 12), dtype=float32)
 
-	x = conv(x, 8, 5)
+	x = conv(x, 12, 3)
 	#x = conv(x, 8, 5)
 	x = maxpool2(x)  # 64
 
 	#x = bn(x)
-	x = conv(x, 16, 3)
+	x = conv(x, 24, 3)
 	#x = conv(x, 16, 3)
 	x = maxpool2(x)  # 32
 
 	#x = bn(x)
-	x = conv(x, 16, 3)
+	x = conv(x, 24, 3)
 	#x = conv(x, 16, 3)
 	x = maxpool2(x)  # 16
 
 	#x = bn(x)
-	x = conv(x, 32, 3)
+	x = conv(x, 48, 3)
 	#x = conv(x, 32, 3)
 	x = maxpool2(x)  # 8
 
-	x = conv(x, 64, 3)
+	x = conv(x, 48, 3)
 	#x = conv(x, 32, 3)
 	x = maxpool2(x)  # 4
 
