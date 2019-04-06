@@ -130,9 +130,8 @@ Epoch 25/30 - 49s 935ms/step - loss: 1.0445 - acc: 0.6510 - val_loss: 0.7938 - v
 
 
 def cnn_128_rot(inputs, num_classes):
-	""" Epoch 44/500 - 456s 381ms/step 
-	- loss: 1.4250e-04 - accuracy: 0.9999 - miou: 0.9370 - 
-	val_loss: 0.0053 - val_accuracy: 0.9999 - val_miou: 0.7339
+	""" ep 30: 
+	loss: 1.0874 - acc: 0.6217 - val_loss: 0.8225 - val_acc: 0.7053
 	"""
 	if backend.image_data_format() == 'channels_first':
 		channel_axis = 1

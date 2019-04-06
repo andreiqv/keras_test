@@ -131,7 +131,9 @@ model = cnn_128_rot(inputs, num_classes=num_classes)
 #model.compile(loss='binary_crossentropy', 
 #			optimizer='rmsprop', metrics=['accuracy'])
 model.compile(loss='categorical_crossentropy', 
-			optimizer='rmsprop', metrics=['accuracy'])
+			optimizer=keras.optimizers.Adam(lr=0.01),
+			#optimizer='rmsprop', 
+			metrics=['accuracy'])
 print(model.summary())
 
 model.fit_generator(
