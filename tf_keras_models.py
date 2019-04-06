@@ -142,8 +142,8 @@ def cnn_128_rot(inputs, num_classes):
 	# inputs: shape=(INPUT_SIZE, INPUT_SIZE, 3)
 	x = inputs
 	print('x:', x) # x == Tensor("input:0", shape=(?, 128, 128, 3), dtype=float32)
-	#x1 = tf.image.rot90(x)
-	x1 = x
+	#x1 = x
+	x1 = tf.image.rot90(x)
 	x2 = x
 	x3 = x
 	x4 = x
