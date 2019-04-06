@@ -23,6 +23,7 @@ train_datagen = ImageDataGenerator(
 		height_shift_range=0.1,
 		horizontal_flip=True,
 		fill_mode='nearest')
+		# loss: 0.8055 - acc: 0.7224 - val_loss: 0.6161 - val_acc: 0.8105
 
 """
 train_datagen = ImageDataGenerator(
