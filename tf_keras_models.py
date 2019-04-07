@@ -208,7 +208,7 @@ def single_net(x, num_classes):
 	x = maxpool2(x)  # 4
 	x = layers.Flatten()(x)
 	x = layers.Dropout(0.5)(x)
-	x = layers.Dense(num_classes, activation='softmax', name=OUTPUT_NAME)(x)
+	x = layers.Dense(num_classes, activation='softmax')(x)
 	return x
 
 
@@ -235,7 +235,7 @@ def cnn_128_rot2(inputs, num_classes):
 	x3 = single_net(x3, num_classes)
 	x4 = single_net(x4, num_classes)
 
-	x = tf.keras.layers.average([x1,x2,x3,x4])
+	x = tf.keras.layers.average([x1,x2,x3,x4], name=OUTPUT_NAME)
 
 	#x = layers.Dense(num_classes, activation='softmax', name=OUTPUT_NAME)(x)
 	model = keras.Model(inputs, x, name='cnn_128')
