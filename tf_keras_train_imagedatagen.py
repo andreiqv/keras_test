@@ -19,7 +19,7 @@ train_datagen = ImageDataGenerator(
 		rescale=1./255,
 		shear_range=0.1,
 		zoom_range=0.1,
-		rotation_range=20,
+		#rotation_range=20,
 		width_shift_range=0.1,
 		height_shift_range=0.1,
 		horizontal_flip=True,
@@ -123,9 +123,9 @@ inputs = Input(shape=(INPUT_SIZE, INPUT_SIZE, 3), name='input')
 #model = model_ResNet50(inputs, num_classes)
 #Epoch 35/50 - 48s 917ms/step - loss: 0.2145 - acc: 0.9285 - val_loss: 1.3748 - val_acc: 0.7603
 
-from tf_keras_models import cnn_128, cnn_128_rot
-model = cnn_128(inputs, num_classes=num_classes)
-#model = cnn_128_rot(inputs, num_classes=num_classes)
+from tf_keras_models import *
+#model = cnn_128(inputs, num_classes=num_classes)
+model = cnn_128_rot2(inputs, num_classes=num_classes)
 
 #sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 #model.compile(loss='categorical_crossentropy', optimizer=sgd)
@@ -137,7 +137,7 @@ model.compile(loss='categorical_crossentropy',
 			metrics=['accuracy'])
 print(model.summary())
 
-model.fit_generator(
+history = model.fit_generator(
         train_generator,
         steps_per_epoch=len(train_generator.filenames) // train_generator.batch_size,
         epochs=50,
@@ -149,3 +149,12 @@ model.fit_generator(
 #	validation_data=(x_val, y_val))
 #score = model.evaluate(x_test, y_test, BATCH_SIZE=32)
 
+import matplotlib.pyplot as plt
+train_acc = history.history['acc']
+val_acc = history.history['val_acc']
+train_loss = history.history['loss']
+val_loss = history.history['val_loss']
+epochs = range(1, len(train_acc) + 1)
+plt.plot(epochs, train_acc, 'bo', label='training_acc')
+plt.plot(epochs, val_acc, 'g-', label='validation_acc')
+plt.show()

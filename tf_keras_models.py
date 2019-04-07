@@ -80,9 +80,10 @@ def model_3(inputs):
 
 
 def cnn_128(inputs, num_classes):
-	""" Epoch 44/500 - 456s 381ms/step 
-	- loss: 1.4250e-04 - accuracy: 0.9999 - miou: 0.9370 - 
-	val_loss: 0.0053 - val_accuracy: 0.9999 - val_miou: 0.7339
+	""" 55s 1s/step
+	15/50 - loss: 1.1076 - acc: 0.6375 - val_loss: 0.9047 - val_acc: 0.7053
+	36/50 - loss: 0.6887 - acc: 0.7710 - val_loss: 0.5702 - val_acc: 0.8132
+
 	"""
 	x = inputs 
 	x = conv(x, 8, 5)
@@ -130,9 +131,9 @@ Epoch 25/30 - 49s 935ms/step - loss: 1.0445 - acc: 0.6510 - val_loss: 0.7938 - v
 
 
 def cnn_128_rot(inputs, num_classes):
-	""" ep 30: 
-	loss: 1.0874 - acc: 0.6217 - val_loss: 0.8225 - val_acc: 0.7053
-	"""
+	# 15/50 - loss: 1.4403 - acc: 0.4961 - val_loss: 1.2140 - val_acc: 0.6023
+	# 37/50 - loss: 1.0423 - acc: 0.6441 - val_loss: 0.8790 - val_acc: 0.7074
+
 	if backend.image_data_format() == 'channels_first':
 		channel_axis = 1
 	else:
@@ -175,6 +176,65 @@ def cnn_128_rot(inputs, num_classes):
 	x = conv(x, 48, 3)
 	#x = conv(x, 32, 3)
 	x = maxpool2(x)  # 4
+
+	x = layers.Flatten()(x)
+	#x = layers.Dropout(0.5)(x)
+	#x = layers.Dense(200, activation='elu')(x)
+	x = layers.Dropout(0.5)(x)
+	x = layers.Dense(num_classes, activation='softmax', name=OUTPUT_NAME)(x)
+	model = keras.Model(inputs, x, name='cnn_128')
+	
+	return model
+
+#---------
+
+def conv_list(ls, f, k):
+	return [conv(x, f, k) for x in ls]
+
+def maxpool2_list(ls):
+	return [maxpool2(x) for x in ls]
+	#return list(map(maxpool2, ls))
+
+def cnn_128_rot2(inputs, num_classes):
+	# 15/50 - loss: 1.4403 - acc: 0.4961 - val_loss: 1.2140 - val_acc: 0.6023
+	# 37/50 - loss: 1.0423 - acc: 0.6441 - val_loss: 0.8790 - val_acc: 0.7074
+
+	if backend.image_data_format() == 'channels_first':
+		channel_axis = 1
+	else:
+		channel_axis = 3
+
+	# inputs: shape=(INPUT_SIZE, INPUT_SIZE, 3)
+	x0 = inputs
+	print('x:', x0) # x == Tensor("input:0", shape=(?, 128, 128, 3), dtype=float32)
+	#x1 = x
+	x1 = layers.Lambda(lambda z: tf.image.rot90(z, k=1))(x)
+	x2 = layers.Lambda(lambda z: tf.image.rot90(z, k=2))(x)
+	x3 = layers.Lambda(lambda z: tf.image.rot90(z, k=3))(x)
+	x4 = x0
+	xls = [x1, x2, x3, x4]
+
+	xls = conv_list(xls, 24, 3)
+	xls = maxpool2_list(xls)  # 64
+
+	xls = conv_list(xls, 24, 3)
+	xls = maxpool2_list(xls)  # 32
+
+	xls = conv_list(xls, 24, 3)
+	xls = maxpool2_list(xls)  # 16
+
+	xls = conv_list(xls, 48, 3)
+	xls = maxpool2_list(xls)  # 8
+
+	xls = conv_list(xls, 48, 3)
+	xls = maxpool2_list(xls)  # 4
+
+	x1, x2, x3, x4 = xls
+	x = layers.concatenate(
+		[x1, x2, x3, x4],
+		axis=channel_axis,
+		name='concat0')	
+	print('concat x:', x) #
 
 	x = layers.Flatten()(x)
 	#x = layers.Dropout(0.5)(x)
