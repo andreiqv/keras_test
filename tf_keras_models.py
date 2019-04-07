@@ -195,6 +195,23 @@ def maxpool2_list(ls):
 	return [maxpool2(x) for x in ls]
 	#return list(map(maxpool2, ls))
 
+def single_net(x):
+	x = conv(x, 24, 3)
+	x = maxpool2(x)  # 64
+	x = conv(x, 24, 3)
+	x = maxpool2(x)  # 32
+	x = conv(x, 24, 3)
+	x = maxpool2(x)  # 16
+	x = conv(x, 48, 3)
+	x = maxpool2(x)  # 8
+	x = conv(x, 48, 3)
+	x = maxpool2(x)  # 4
+	x = layers.Flatten()(x)
+	x = layers.Dropout(0.5)(x)
+	x = layers.Dense(num_classes, activation='softmax', name=OUTPUT_NAME)(x)
+	return x
+
+
 def cnn_128_rot2(inputs, num_classes):
 	# 15/50 - loss: 1.4403 - acc: 0.4961 - val_loss: 1.2140 - val_acc: 0.6023
 	# 37/50 - loss: 1.0423 - acc: 0.6441 - val_loss: 0.8790 - val_acc: 0.7074
@@ -212,35 +229,15 @@ def cnn_128_rot2(inputs, num_classes):
 	x2 = layers.Lambda(lambda z: tf.image.rot90(z, k=2))(x0)
 	x3 = layers.Lambda(lambda z: tf.image.rot90(z, k=3))(x0)
 	x4 = x0
-	xls = [x1, x2, x3, x4]
 
-	xls = conv_list(xls, 24, 3)
-	xls = maxpool2_list(xls)  # 64
+	x1 = single_net(x1)
+	x2 = single_net(x2)
+	x3 = single_net(x3)
+	x4 = single_net(x4)
 
-	xls = conv_list(xls, 24, 3)
-	xls = maxpool2_list(xls)  # 32
+	x = keras.layers.Average([x1,x2,x3,x4])
 
-	xls = conv_list(xls, 24, 3)
-	xls = maxpool2_list(xls)  # 16
-
-	xls = conv_list(xls, 48, 3)
-	xls = maxpool2_list(xls)  # 8
-
-	xls = conv_list(xls, 48, 3)
-	xls = maxpool2_list(xls)  # 4
-
-	x1, x2, x3, x4 = xls
-	x = layers.concatenate(
-		[x1, x2, x3, x4],
-		axis=channel_axis,
-		name='concat0')	
-	print('concat x:', x) #
-
-	x = layers.Flatten()(x)
-	#x = layers.Dropout(0.5)(x)
-	#x = layers.Dense(200, activation='elu')(x)
-	x = layers.Dropout(0.5)(x)
-	x = layers.Dense(num_classes, activation='softmax', name=OUTPUT_NAME)(x)
+	#x = layers.Dense(num_classes, activation='softmax', name=OUTPUT_NAME)(x)
 	model = keras.Model(inputs, x, name='cnn_128')
 	
 	return model
