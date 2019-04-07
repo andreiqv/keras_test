@@ -195,7 +195,7 @@ def maxpool2_list(ls):
 	return [maxpool2(x) for x in ls]
 	#return list(map(maxpool2, ls))
 
-def single_net(x):
+def single_net(x, num_classes):
 	x = conv(x, 24, 3)
 	x = maxpool2(x)  # 64
 	x = conv(x, 24, 3)
@@ -230,10 +230,10 @@ def cnn_128_rot2(inputs, num_classes):
 	x3 = layers.Lambda(lambda z: tf.image.rot90(z, k=3))(x0)
 	x4 = x0
 
-	x1 = single_net(x1)
-	x2 = single_net(x2)
-	x3 = single_net(x3)
-	x4 = single_net(x4)
+	x1 = single_net(x1, num_classes)
+	x2 = single_net(x2, num_classes)
+	x3 = single_net(x3, num_classes)
+	x4 = single_net(x4, num_classes)
 
 	x = keras.layers.Average([x1,x2,x3,x4])
 
