@@ -144,10 +144,10 @@ history = model.fit_generator(
         validation_data=validation_generator,
         validation_steps=len(validation_generator.filenames) // validation_generator.batch_size)
 #model.save_weights('first_try.h5')  # always save your weights after training or during training
-
 #model.fit(X_train, X_train, BATCH_SIZE=32, epochs=10, 
 #	validation_data=(x_val, y_val))
 #score = model.evaluate(x_test, y_test, BATCH_SIZE=32)
+del model # free GPU memory
 
 import matplotlib.pyplot as plt
 train_acc = history.history['acc']
