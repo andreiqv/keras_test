@@ -157,4 +157,15 @@ val_loss = history.history['val_loss']
 epochs = range(1, len(train_acc) + 1)
 plt.plot(epochs, train_acc, 'bo', label='training_acc')
 plt.plot(epochs, val_acc, 'g-', label='validation_acc')
-plt.show()
+plt.savefig('_out.png')
+
+print(history.history)
+print(type(history.history))
+import pandas as pd
+#data = {'epochs':list(epochs),
+#		'train_acc': train_acc, 'val_acc':val_acc,
+#		'train_loss':train_loss, 'val_loss':val_loss}
+df = pd.DataFrame(history.history)
+epochs_list = list(range(1, len(history.history['acc']) + 1))
+df.insert(0, 'epoch', epochs_list)
+df.to_csv('_out_results.csv', float_format='%.4f', index=False)
